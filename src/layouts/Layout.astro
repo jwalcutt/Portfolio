@@ -1,0 +1,172 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "ML Engineer & Researcher | Building Intelligent Systems",
+  description = "Machine learning engineer specializing in deep learning, NLP, and computer vision. Turning research into production-ready solutions."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Background effects -->
+    <div class="paper-texture"></div>
+    <div class="grid-pattern"></div>
+    <canvas id="neural-canvas"></canvas>
+    
+    <slot />
+    
+    <script>
+      // Neural network background animation
+      const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      let nodes: Array<{x: number, y: number, vx: number, vy: number, radius: number}> = [];
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        initNodes();
+      }
+      
+      function initNodes() {
+        nodes = [];
+        const nodeCount = Math.floor((width * height) / 25000);
+        
+        for (let i = 0; i < nodeCount; i++) {
+          nodes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            radius: Math.random() * 2 + 1
+          });
+        }
+      }
+      
+      function draw() {
+        if (!ctx) return;
+        
+        ctx.clearRect(0, 0, width, height);
+        
+        // Update and draw nodes
+        nodes.forEach((node, i) => {
+          // Update position
+          node.x += node.vx;
+          node.y += node.vy;
+          
+          // Bounce off edges
+          if (node.x < 0 || node.x > width) node.vx *= -1;
+          if (node.y < 0 || node.y > height) node.vy *= -1;
+          
+          // Mouse interaction
+          const dx = mouseX - node.x;
+          const dy = mouseY - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 150) {
+            node.vx -= dx * 0.0001;
+            node.vy -= dy * 0.0001;
+          }
+          
+          // Draw connections
+          nodes.forEach((other, j) => {
+            if (i >= j) return;
+            
+            const ox = other.x - node.x;
+            const oy = other.y - node.y;
+            const odist = Math.sqrt(ox * ox + oy * oy);
+            
+            if (odist < 120) {
+              const alpha = (1 - odist / 120) * 0.15;
+              ctx.beginPath();
+              ctx.moveTo(node.x, node.y);
+              ctx.lineTo(other.x, other.y);
+              ctx.strokeStyle = `rgba(240, 180, 41, ${alpha})`;
+              ctx.lineWidth = 1;
+              ctx.stroke();
+            }
+          });
+          
+          // Draw node
+          ctx.beginPath();
+          ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(240, 180, 41, 0.4)';
+          ctx.fill();
+        });
+        
+        requestAnimationFrame(draw);
+      }
+      
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+      
+      resize();
+      draw();
+      
+      // Reveal on scroll
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.reveal').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Smooth scroll
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  #neural-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+</style>

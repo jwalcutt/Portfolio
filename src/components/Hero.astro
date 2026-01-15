@@ -1,0 +1,432 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-container container">
+    <div class="hero-content">
+      <h1 class="hero-title reveal reveal-delay-1">
+        <span class="hero-title-line">Machine Learning</span>
+        <span class="hero-title-line">
+          <span class="hero-title-accent">Engineer</span>
+          <span class="hero-title-ampersand">&</span>
+        </span>
+        <span class="hero-title-line">Researcher</span>
+      </h1>
+      
+      <p class="hero-description reveal reveal-delay-2">
+        I build intelligent systems that bridge the gap between cutting-edge research 
+        and production-ready applications. Specializing in deep learning, natural language 
+        processing, and computer vision.
+      </p>
+      
+      <div class="hero-ctas reveal reveal-delay-3">
+        <a href="#projects" class="hero-btn-primary">
+          <span>View Projects</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
+        <a href="#contact" class="hero-btn-secondary">
+          <span>Contact Me</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual reveal reveal-delay-2">
+      <div class="hero-network">
+        <!-- Neural network visualization -->
+        <svg viewBox="0 0 400 400" class="network-svg">
+          <!-- Layer 1 -->
+          <g class="network-layer layer-1">
+            <circle cx="80" cy="80" r="12" class="node"/>
+            <circle cx="80" cy="160" r="12" class="node"/>
+            <circle cx="80" cy="240" r="12" class="node"/>
+            <circle cx="80" cy="320" r="12" class="node"/>
+          </g>
+          
+          <!-- Layer 2 -->
+          <g class="network-layer layer-2">
+            <circle cx="200" cy="100" r="12" class="node"/>
+            <circle cx="200" cy="200" r="12" class="node"/>
+            <circle cx="200" cy="300" r="12" class="node"/>
+          </g>
+          
+          <!-- Layer 3 -->
+          <g class="network-layer layer-3">
+            <circle cx="320" cy="150" r="12" class="node"/>
+            <circle cx="320" cy="250" r="12" class="node"/>
+          </g>
+          
+          <!-- Connections Layer 1 to 2 -->
+          <g class="network-connections">
+            <line x1="92" y1="80" x2="188" y2="100" class="connection"/>
+            <line x1="92" y1="80" x2="188" y2="200" class="connection"/>
+            <line x1="92" y1="80" x2="188" y2="300" class="connection"/>
+            <line x1="92" y1="160" x2="188" y2="100" class="connection"/>
+            <line x1="92" y1="160" x2="188" y2="200" class="connection"/>
+            <line x1="92" y1="160" x2="188" y2="300" class="connection"/>
+            <line x1="92" y1="240" x2="188" y2="100" class="connection"/>
+            <line x1="92" y1="240" x2="188" y2="200" class="connection"/>
+            <line x1="92" y1="240" x2="188" y2="300" class="connection"/>
+            <line x1="92" y1="320" x2="188" y2="100" class="connection"/>
+            <line x1="92" y1="320" x2="188" y2="200" class="connection"/>
+            <line x1="92" y1="320" x2="188" y2="300" class="connection"/>
+          </g>
+          
+          <!-- Connections Layer 2 to 3 -->
+          <g class="network-connections">
+            <line x1="212" y1="100" x2="308" y2="150" class="connection"/>
+            <line x1="212" y1="100" x2="308" y2="250" class="connection"/>
+            <line x1="212" y1="200" x2="308" y2="150" class="connection"/>
+            <line x1="212" y1="200" x2="308" y2="250" class="connection"/>
+            <line x1="212" y1="300" x2="308" y2="150" class="connection"/>
+            <line x1="212" y1="300" x2="308" y2="250" class="connection"/>
+          </g>
+          
+          <!-- Data flow animation -->
+          <g class="data-particles">
+            <circle r="3" class="particle particle-1">
+              <animateMotion dur="2s" repeatCount="indefinite" path="M92,80 L188,200"/>
+            </circle>
+            <circle r="3" class="particle particle-2">
+              <animateMotion dur="2.5s" repeatCount="indefinite" path="M92,160 L188,100"/>
+            </circle>
+            <circle r="3" class="particle particle-3">
+              <animateMotion dur="1.8s" repeatCount="indefinite" path="M212,200 L308,150"/>
+            </circle>
+          </g>
+        </svg>
+        
+        <!-- Decorative elements -->
+        <div class="network-label network-label-input">
+          <span class="network-label-text">Input Layer</span>
+          <span class="network-label-dim">n = 4</span>
+        </div>
+        <div class="network-label network-label-hidden">
+          <span class="network-label-text">Hidden Layer</span>
+          <span class="network-label-dim">n = 3</span>
+        </div>
+        <div class="network-label network-label-output">
+          <span class="network-label-text">Output Layer</span>
+          <span class="network-label-dim">n = 2</span>
+        </div>
+      </div>
+      
+      <!-- Code snippet decoration -->
+      <div class="hero-code">
+        <div class="hero-code-header">
+          <span class="hero-code-dot"></span>
+          <span class="hero-code-dot"></span>
+          <span class="hero-code-dot"></span>
+          <span class="hero-code-filename">model.py</span>
+        </div>
+        <pre><code><span class="code-keyword">class</span> <span class="code-class">Transformer</span>(nn.Module):
+    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self, d_model=<span class="code-num">512</span>):
+        self.attention = MultiHeadAttention()
+        self.ffn = FeedForward(d_model)</code></pre>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll to explore</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    position: relative;
+  }
+  
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+  }
+  
+  .hero-title {
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-title-line {
+    display: block;
+  }
+  
+  .hero-title-accent {
+    color: var(--accent-amber);
+  }
+  
+  .hero-title-ampersand {
+    font-style: italic;
+    color: var(--text-muted);
+    margin: 0 0.25em;
+  }
+  
+  .hero-description {
+    max-width: 520px;
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  
+  .hero-btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent-amber);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s var(--ease-spring);
+  }
+  
+  .hero-btn-primary:hover {
+    background: var(--accent-amber-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(240, 180, 41, 0.2);
+  }
+  
+  .hero-btn-primary svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s;
+  }
+  
+  .hero-btn-primary:hover svg {
+    transform: translateY(4px);
+  }
+  
+  .hero-btn-secondary {
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s;
+  }
+  
+  .hero-btn-secondary:hover {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+  }
+  
+  /* Visual side */
+  .hero-visual {
+    position: relative;
+  }
+  
+  .hero-network {
+    position: relative;
+    padding: 2rem;
+  }
+  
+  .network-svg {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+  }
+  
+  .node {
+    fill: var(--bg-card);
+    stroke: var(--accent-amber);
+    stroke-width: 2;
+    transition: all 0.3s;
+  }
+  
+  .network-svg:hover .node {
+    fill: var(--accent-amber-dim);
+  }
+  
+  .connection {
+    stroke: var(--border-default);
+    stroke-width: 1;
+    opacity: 0.5;
+  }
+  
+  .particle {
+    fill: var(--accent-amber);
+    opacity: 0.8;
+  }
+  
+  .particle-1 { animation-delay: 0s; }
+  .particle-2 { animation-delay: 0.5s; }
+  .particle-3 { animation-delay: 1s; }
+  
+  .network-label {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    font-family: var(--font-mono);
+  }
+  
+  .network-label-text {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .network-label-dim {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+  }
+  
+  .network-label-input {
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%);
+    text-align: right;
+  }
+  
+  .network-label-hidden {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  
+  .network-label-output {
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    text-align: left;
+  }
+  
+  /* Code snippet */
+  .hero-code {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    width: 320px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    font-size: 0.8125rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .hero-code-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-default);
+  }
+  
+  .hero-code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-default);
+  }
+  
+  .hero-code-dot:nth-child(1) { background: #f78166; }
+  .hero-code-dot:nth-child(2) { background: #f0b429; }
+  .hero-code-dot:nth-child(3) { background: #3fb9a0; }
+  
+  .hero-code-filename {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  
+  .hero-code pre {
+    padding: 1rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+  
+  .code-keyword { color: var(--accent-coral); }
+  .code-class { color: var(--accent-amber); }
+  .code-func { color: var(--accent-blue); }
+  .code-num { color: var(--accent-teal); }
+  
+  /* Scroll indicator */
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .hero-scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--accent-amber), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+  
+  .hero-scroll-text {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  
+  @media (max-width: 1000px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .hero-visual {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .hero-metrics {
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    
+    .hero-ctas {
+      flex-direction: column;
+    }
+    
+    .hero-btn-primary, .hero-btn-secondary {
+      justify-content: center;
+    }
+  }
+</style>

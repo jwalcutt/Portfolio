@@ -1,0 +1,319 @@
+---
+const experiences = [
+  {
+    role: "Software Engineering Co-op",
+    company: "nVent",
+    period: "May 2025 - December 2025",
+    location: "Solon, OH",
+    achievements: [
+      "Trained and tested a Convolutional Autoencoder with PyTorch to detect anomalous activity in electrical waveforms, achieving a 93% detection rate on real datasets containing electrical faults",
+      "Designed a robust anomaly scoring and thresholding method in Python, reducing false positives by 85% while maintaining a high detection rate",
+      "Ran Bayesian hyperparameter optimization with Optuna, significantly cutting experimentation time and achieving a high performance model with fewer training runs",
+      "Parsed Node.js server logs and organized testing results into a dashboard using React.js, TailwindCSS, and JavaScript, improving testing and documentation efficiency",
+      "Maintained a Jira automation tool in Excel tracking 1000+ projects, saving the company $100k+ in labor costs",
+    ],
+    technologies: ["Python", "PyTorch", "Pandas", "React.js", "TailwindCSS", "JavaScript", "Excel", "Jira", "Optuna"]
+  },
+  {
+    role: "Software Development Intern",
+    company: "VN Services",
+    period: "June 2024 - December 2024",
+    location: "Chesterland, OH",
+    achievements: [
+      "Developed a robust full-stack web application using Next.js and Flask capable of securely hosting and querying databases with SQLite",
+      "Deployed the application to the cloud using Docker and AWS Fargate and tested it extensively on both mobile and desktop devices",
+      "Developed a RESTful API using Flask and SQLite to manage user authentication and data storage, ensuring secure and efficient data handling",
+      "Assisted in the development of a training platform for new employees, featuring a variety of communication tools and interactive elements",
+      "Wrote an automation script allowing database updates to be automatically visualized across multiple Excel graphs"
+    ],
+    technologies: ["Python", "Next.js", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Docker", "AWS Fargate"]
+  }
+];
+
+---
+
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="experience-grid">
+      <div class="experience-content">
+        <div class="section-header reveal">
+          <div class="section-eyebrow">
+            <span class="section-eyebrow-line"></span>
+            <span class="section-eyebrow-text">Career</span>
+          </div>
+          <h2 class="section-title">
+            Professional <span class="text-gradient">Experience</span>
+          </h2>
+        </div>
+        
+        <div class="timeline">
+          {experiences.map((exp, index) => (
+            <div class={`timeline-item reveal reveal-delay-${index + 1}`}>
+              <div class="timeline-marker">
+                <div class="timeline-dot"></div>
+                <div class="timeline-line"></div>
+              </div>
+              
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <div class="timeline-role-info">
+                    <h3 class="timeline-role">{exp.role}</h3>
+                    <span class="timeline-company">{exp.company}</span>
+                  </div>
+                  <div class="timeline-meta">
+                    <span class="timeline-period">{exp.period}</span>
+                    <span class="timeline-location">{exp.location}</span>
+                  </div>
+                </div>
+                <ul class="timeline-achievements">
+                  {exp.achievements.map(achievement => (
+                    <li>{achievement}</li>
+                  ))}
+                </ul>
+                
+                <div class="timeline-tech">
+                  {exp.technologies.map(tech => (
+                    <span class="timeline-tech-item">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div class="sidebar">
+        <div class="education-card reveal">
+          <h3 class="education-title">Education</h3>
+          <div class="education-item">
+            <div class="education-degree">B.S. Computer Science</div>
+            <div class="education-school">Cleveland State University</div>
+            <div class="education-detail">GPA: 3.92</div>
+            <div class="education-year">2023 - 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    position: relative;
+  }
+  
+  .experience-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 4rem;
+    align-items: start;
+  }
+  
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 1.5rem;
+  }
+  
+  .timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--accent-amber);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--accent-amber-dim);
+  }
+  
+  .timeline-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border-default);
+    margin-top: 0.5rem;
+  }
+  
+  .timeline-item:last-child .timeline-line {
+    display: none;
+  }
+  
+  .timeline-content {
+    padding-bottom: 3rem;
+  }
+  
+  .timeline-item:last-child .timeline-content {
+    padding-bottom: 0;
+  }
+  
+  .timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .timeline-role {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .timeline-company {
+    font-size: 1rem;
+    color: var(--accent-amber);
+  }
+  
+  .timeline-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.125rem;
+    flex-shrink: 0;
+  }
+  
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+  }
+  
+  .timeline-location {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+  
+  .timeline-achievements {
+    list-style: none;
+    margin-bottom: 1rem;
+  }
+  
+  .timeline-achievements li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+  
+  .timeline-achievements li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-amber);
+    border-radius: 50%;
+  }
+  
+  .timeline-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .timeline-tech-item {
+    padding: 0.25rem 0.625rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .education-card {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+  }
+
+  .education-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  /* Education */
+  .education-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-default);
+  }
+  
+  .education-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  
+  .education-degree {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+  
+  .education-school {
+    color: var(--accent-amber);
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .education-detail {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+  
+  .education-year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+  }
+  
+  @media (max-width: 1000px) {
+    .experience-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      position: static;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .timeline-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .timeline-meta {
+      align-items: flex-start;
+    }
+  }
+</style>

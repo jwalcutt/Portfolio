@@ -1,0 +1,160 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <span class="footer-logo-symbol">λ</span>
+          <span class="footer-logo-name">Jacob Walcutt</span>
+        </a>
+        <p class="footer-tagline">
+          Building intelligent systems that make a difference.
+        </p>
+      </div>
+      
+      <div class="footer-center">
+        <span class="footer-copyright">
+          &copy; {currentYear} Jacob Walcutt. All rights reserved.
+        </span>
+        <span class="footer-note">
+          Built with Astro.js
+        </span>
+      </div>
+      
+      <div class="footer-actions">
+        <a href="#" class="footer-back-top">
+          <span>Back to top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 3rem 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-default);
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .footer-logo-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    background: var(--accent-amber);
+    border-radius: var(--radius-sm);
+  }
+  
+  .footer-logo-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+  
+  .footer-tagline {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+  
+  .footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-align: center;
+  }
+  
+  .footer-copyright {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+  
+  .footer-note {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+  }
+  
+  .footer-back-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    transition: all 0.3s;
+  }
+  
+  .footer-back-top:hover {
+    color: var(--accent-amber);
+    border-color: var(--accent-amber);
+  }
+  
+  .footer-back-top svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s;
+  }
+  
+  .footer-back-top:hover svg {
+    transform: translateY(-4px);
+  }
+  
+  .footer-decoration {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-default);
+  }
+  
+  .footer-line {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-amber), transparent);
+    opacity: 0.3;
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .footer-brand {
+      align-items: center;
+    }
+  }
+</style>
