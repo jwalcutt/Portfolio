@@ -1,0 +1,205 @@
+---
+import csuLogo from '../images/csu.png';
+
+const honors = [
+  {
+    label: "Summa Cum Laude",
+    detail: "Graduated with highest honors",
+  },
+  {
+    label: "President's List",
+    detail: "Spring 2026, Fall 2024",
+  },
+  {
+    label: "Dean's List",
+    detail: "Spring 2025, Spring 2024",
+  },
+  {
+    label: "Choose Ohio First Scholarship",
+    link: "https://www.csuohio.edu/choose-ohio",
+  },
+];
+---
+
+<section class="education" id="education">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">
+        <span class="section-eyebrow-line"></span>
+        <span class="section-eyebrow-text">Education</span>
+      </div>
+      <h2 class="section-title">
+        Academic <span class="text-gradient">Record</span>
+      </h2>
+    </div>
+
+    <article class="edu-card card reveal">
+      <div class="edu-logo-panel">
+        <img src={csuLogo.src} alt="Cleveland State University" width="220" loading="lazy" />
+      </div>
+
+      <div class="edu-body">
+        <h3 class="edu-name">Cleveland State University</h3>
+        <p class="edu-degree">B.S. Computer Science</p>
+
+        <p class="edu-line">Cleveland, OH &middot; Jan 2023 &ndash; May 2026</p>
+        <p class="edu-line">GPA: 3.90 / 4.00</p>
+
+        <div class="edu-awards">
+          <h4 class="edu-awards-title">Awards &amp; Scholarships</h4>
+          <ul class="edu-award-list">
+            {honors.map(item => (
+              <li class="edu-award">
+                {item.link ? (
+                  <a class="edu-award-link" href={item.link} target="_blank" rel="noopener">
+                    {item.logo && <img class="edu-award-logo" src={item.logo} alt="" loading="lazy" />}
+                    <span>{item.label}</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                  </a>
+                ) : (
+                  <span>
+                    <span class="edu-award-label">{item.label}:</span> {item.detail}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .education {
+    position: relative;
+  }
+
+  .edu-card {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    padding: 2.5rem;
+  }
+
+  .edu-logo-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: linear-gradient(160deg, #ffffff 0%, #f4f7f4 100%);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+  }
+
+  .edu-logo-panel img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+  }
+
+  .edu-body {
+    min-width: 0;
+  }
+
+  .edu-name {
+    font-size: 1.75rem;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .edu-degree {
+    font-size: 1.0625rem;
+    color: var(--accent-amber);
+    margin-bottom: 1.25rem;
+  }
+
+  .edu-line {
+    font-size: 1rem;
+    color: var(--text-primary);
+    line-height: 1.7;
+  }
+
+  .edu-awards {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-default);
+  }
+
+  .edu-awards-title {
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    margin-bottom: 0.85rem;
+  }
+
+  .edu-award-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .edu-award {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+
+  .edu-award-label {
+    font-weight: 600;
+  }
+
+  .edu-award-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: var(--accent-amber);
+    text-decoration: underline;
+    text-decoration-color: rgba(240, 180, 41, 0.5);
+    text-underline-offset: 4px;
+    transition: gap 0.3s, text-decoration-color 0.3s;
+  }
+
+  .edu-award-logo {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    padding: 3px;
+    background: #ffffff;
+    border-radius: 4px;
+  }
+
+  .edu-award-link svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+
+  .edu-award-link:hover {
+    text-decoration-color: var(--accent-amber);
+    gap: 0.65rem;
+  }
+
+  .edu-award-link:hover svg {
+    transform: translate(3px, -3px);
+  }
+
+  @media (max-width: 700px) {
+    .edu-card {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    .edu-logo-panel {
+      max-width: 240px;
+    }
+  }
+</style>

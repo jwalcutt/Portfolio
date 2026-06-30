@@ -1,40 +1,105 @@
 ---
 const projects = [
   {
-    title: "Transformer-based Anomaly Detection",
+    id: "crossmodal-rag",
+    title: "Cross-Modal RAG System",
+    category: "Retrieval and Memory",
+    description: "A local-first memory engine that turns long-lived personal artifacts (notes, code, images, and PDF files) into a queryable, time-aware system. Every answer stays tied to retrievable source evidence with an explicit citation.",
+    tags: ["RAG", "Embeddings", "FAISS", "Local-First", "OCR"],
+    github: "https://github.com/jwalcutt/crossmodalrag",
+    image: "src/images/rag.jpeg",
+    detail: {
+      summary: "CrossModalRAG builds a hierarchical, time-aware memory on top of standard Retrieval-Augmented Generation (RAG). It answers questions about your own past work and grounds every claim in a specific source location you can open and check.",
+      sections: [
+        {
+          heading: "The problem",
+          body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not all deserve equal weight. CrossModalRAG answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
+        },
+        {
+          heading: "Cross-modal ingestion",
+          body: "I extended the ingestion pipeline so images and PDF files become first-class evidence alongside notes and code. A PDF chunk carries its page number, so a citation can render as 'file.pdf p.4'. An image is registered as a source and made searchable through local optical character recognition (OCR), recording region coordinates when the engine supplies them. The source fingerprint includes the OCR engine version, so re-ingesting an unchanged file does nothing, while an engine upgrade re-derives only what it affects."
+        },
+        {
+          heading: "Hierarchical memory model",
+          body: "Above the raw evidence layer, the system derives three higher levels: atomic events, episodes that group those events, and durable concepts. These levels answer synthesis questions such as 'how did my understanding of chunking change?' that flat retrieval cannot. Each higher node links down to at least one citable evidence chunk, so no abstraction loses its provenance. Derivation runs on a local model at temperature zero and skips any input whose fingerprint has not changed."
+        },
+        {
+          heading: "Grounded retrieval and answering",
+          body: "A single query returns mixed evidence types (text, code, image, and PDF) and reranks them with awareness of their modality. Generation is constrained to a claim-then-evidence format with explicit source identifiers, and it reports when the evidence is too thin instead of inventing facts. Image-native embeddings stay behind a benefit threshold fixed in advance, so the system adopts them only when measurement justifies the added complexity."
+        },
+        {
+          heading: "Engineering discipline",
+          body: "The system runs locally and stays light on dependencies. OCR, PDF parsing, and image-embedding backends install as optional extras, and the core package works without them, skipping a modality with a clear message when its extra is absent. Cross-modal evidence reuses the existing database tables through new field values rather than a schema redesign. Retrieval quality is measured by Recall@K, Mean Reciprocal Rank (MRR), and citation hit-rate."
+        }
+      ]
+    }
+  },
+  {
+    id: "fsm-anomaly",
+    title: "FSM Anomaly Detection",
     category: "Deep Learning",
-    description: "Developed a novel attention-based architecture for detecting anomalies in high-frequency time series data, achieving 94% accuracy on industrial sensor datasets.",
-    tags: ["PyTorch", "Transformers", "Time Series"],
-    metrics: { accuracy: "94.2%", latency: "< 10ms" },
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
-    link: "#"
+    description: "Unsupervised runtime fault detection in finite state machines (FSMs). A dense autoencoder trained only on normal behavior flags anomalous state sequences, measured against a rule-based transition whitelist across three FSMs and three fault types.",
+    tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "NumPy", "scikit-learn"],
+    github: "https://github.com/jwalcutt/fsm-anomaly-detection",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+    detail: {
+      summary: "A complete pipeline for catching runtime faults in finite state machines. A small dense autoencoder learns only from traces of normal behavior, then flags any state sequence whose reconstruction error passes a learned threshold. Its accuracy is measured directly against a stateless transition-whitelist baseline.",
+      sections: [
+        {
+          heading: "The problem",
+          body: "Finite state machines control sequential logic throughout digital hardware, including traffic controllers, communication protocols, and on-chip security blocks. At runtime the state register can be corrupted by stuck-at faults, single-event upsets, fault-injection attacks, or random perturbation, and offline test methods often miss these failures. The project asks whether an autoencoder trained only on normal traces can catch such faults as they happen. It then measures that detector against a rule that checks each consecutive state pair against the legal transition table."
+        },
+        {
+          heading: "What I built",
+          body: "I implemented three reference FSMs of increasing complexity: a four-state traffic light, a five-state detector for the bit pattern 1011, and a six-state vending machine. Around them I built a synthetic data-generation pipeline, three fault injectors (stuck-at, transition, and perturbation), the autoencoder with its training and threshold selection, and a full evaluation harness. The pipeline also produces the figures and tables for a paper: state diagrams, reconstruction-error histograms, receiver operating characteristic (ROC) curves, and the results and sensitivity tables."
+        },
+        {
+          heading: "Method",
+          body: "Each state is one-hot encoded to avoid implying a false ordering, then sliced into sliding windows of length N. A symmetric dense autoencoder (128, 64, 16 bottleneck, 64, 128) trains with binary cross-entropy, the correct loss for one-hot inputs, using Adam over 50 epochs, with one model per FSM. The detection threshold sits at the 99th percentile of the validation reconstruction error, which targets a false-positive rate near 1% suited to a hardware monitor. The whitelist baseline flags any window that contains an illegal consecutive state pair."
+        },
+        {
+          heading: "Results",
+          body: "The autoencoder reaches perfect detection on the periodic traffic light. On the vending machine it closes the recall gap for stuck-at faults, catching 94.1% of them against the whitelist's 74.4%, because a frozen legal state still forms a legal pair that the whitelist accepts. On the bit-pattern detector the whitelist's perfect precision keeps it ahead on F1, yet the autoencoder's area under the curve stays between 0.87 and 0.98, which shows the F1 gap comes mostly from threshold choice. A window-size sweep shows the bit-pattern detector improving steadily as windows grow."
+        },
+        {
+          heading: "Limitations",
+          body: "Each trained model fits only the FSM whose traces it saw, much like a per-asset anomaly detector in industry; the method transfers, but an individual model does not. Every experiment ran on simulated traces, which lack the electrical noise, jitter, and metastability of real registers. Sliding-window detection also adds latency of up to N timesteps, and the percentile threshold trades false-positive rate against sensitivity."
+        }
+      ]
+    }
   },
   {
-    title: "Multi-Modal RAG System",
-    category: "NLP / Computer Vision",
-    description: "Built a retrieval-augmented generation system that processes both text and images, enabling semantic search across heterogeneous document collections.",
-    tags: ["LangChain", "CLIP", "Vector DB"],
-    metrics: { recall: "89%", documents: "2M+" },
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80",
-    link: "#"
-  },
-  {
-    title: "Real-time Object Tracking",
-    category: "Computer Vision",
-    description: "Implemented a production-grade multi-object tracking system using YOLO and DeepSORT, deployed on edge devices for warehouse automation.",
-    tags: ["YOLO", "TensorRT", "Edge AI"],
-    metrics: { fps: "60+", mAP: "78.5%" },
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
-    link: "#"
-  },
-  {
-    title: "Federated Learning Framework",
-    category: "Distributed ML",
-    description: "Designed and open-sourced a federated learning framework for privacy-preserving model training across distributed healthcare datasets.",
-    tags: ["Federated Learning", "Privacy", "Healthcare"],
-    metrics: { nodes: "50+", stars: "1.2k" },
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80",
-    link: "#"
+    id: "llm-autoformalization",
+    title: "Improving LLM Reasoning Through Autoformalization",
+    category: "LLMs and Formal Methods",
+    description: "My senior design project. We evaluated and improved how well flagship large language models (LLMs) convert natural-language mathematics into verifiable LEAN 4 code, then wrapped the method in an accessible natural-language interface for formal theorem proving.",
+    tags: ["LLMs", "LEAN 4", "LangChain", "RAG", "Tool Use"],
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80",
+    detail: {
+      summary: "An online, natural-language interface that shows the autoformalization (AF) abilities of flagship large language models (LLMs), paired with a system that proves symbolic equivalence and measures semantic consistency. To our knowledge, it is the first such system built for the LEAN 4 proof assistant.",
+      sections: [
+        {
+          heading: "Motivation",
+          body: "LLM adoption has grown fast, yet the reasoning often fails under close inspection, behaving more like probabilistic pattern-matching than formal logic. Theorem proving sits upstream of that reasoning and demands real rigor: reading a statement precisely, tracking many claims at once, and deriving new claims from old ones. Formal proof systems help mathematical research but stay niche and hard to use, so the project set out to lower that barrier and to measure how well current models formalize."
+        },
+        {
+          heading: "What the project tackled",
+          body: "Theorem proving splits into autoformalization (AF), automatic theorem proving, and informalization. This project focused on proposition AF, the step that turns a natural-language theorem statement into a LEAN 4 definition. We wrote detailed few-shot prompts that walk the model through one process: summarize the statement, list its variables and hypotheses, formalize each piece against the Mathlib library, gather the required definitions into a file header, and compile-check the result, stepping back when compilation fails."
+        },
+        {
+          heading: "My contributions",
+          body: "I worked on the LEAN 4 and theorem-proving research that grounded the technical approach, and I helped design the tool-augmented AF method. On the web application I contributed to a single-page React client on React Router with a Flask backend, Google sign-in through OAuth, token-based authentication, a streaming chat interface, and a link out to a live LEAN editor for running generated code. The models reached two LangChain tools: Loogle, a search engine over Mathlib, and a live LEAN environment through a JSON-RPC fork of LeanREPL, so they could look up identifiers and confirm that a theorem compiles."
+        },
+        {
+          heading: "Retrieval augmentation",
+          body: "To raise formalization quality, I helped build a vector database over Mathlib for retrieval. The pipeline split the Mathlib4 codebase into roughly 125,000 chunks of 1,024 tokens with 128 tokens of overlap, using OpenAI's tiktoken tokenizer, then embedded each chunk with the text-embedding-ada-002 model into a FAISS index. At query time the system embeds the user's input, pulls the five closest Mathlib chunks, and adds them to the prompt, which helps resolve ambiguous terms and shape correct LEAN structure, types, and headers."
+        },
+        {
+          heading: "Evaluation and results",
+          body: "We tested on ProofNet, a benchmark of college-level mathematics, using two measures: 1) symbolic equivalence (a formal LEAN proof that two formalizations imply each other), and 2) semantic consistency (the cosine similarity between their re-informalized statements). Few-shot examples plus tool access raised compiling propositions from 30.4% to 70.2% on the validation split. Across 186 test problems, Gemini 2.0 Flash led with 30% of theorems compiling and 10% proven fully equivalent, and it outperformed the reasoning model o4-mini, probably because non-reasoning models follow instructions more closely."
+        }
+      ]
+    }
   }
 ];
 ---
@@ -57,45 +122,36 @@ const projects = [
     
     <div class="projects-grid">
       {projects.map((project, index) => (
-        <article class={`project-card card reveal reveal-delay-${(index % 4) + 1}`}>
+        <article class={`project-card card reveal reveal-delay-${(index % 4) + 1}`} data-modal-open={project.id}>
           <div class="project-image">
             <img src={project.image} alt={project.title} loading="lazy" />
             <div class="project-image-overlay"></div>
             <span class="project-category">{project.category}</span>
           </div>
-          
+
           <div class="project-content">
             <h3 class="project-title">{project.title}</h3>
             <p class="project-description">{project.description}</p>
-            
+
             <div class="project-tags">
               {project.tags.map(tag => (
                 <span class="project-tag">{tag}</span>
               ))}
             </div>
-            
-            <div class="project-metrics">
-              {Object.entries(project.metrics).map(([key, value]) => (
-                <div class="project-metric">
-                  <span class="project-metric-value">{value}</span>
-                  <span class="project-metric-label">{key}</span>
-                </div>
-              ))}
-            </div>
-            
-            <a href={project.link} class="project-link">
+
+            <button class="project-link" data-modal-open={project.id} type="button">
               <span>View Details</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 17L17 7M17 7H7M17 7V17"/>
               </svg>
-            </a>
+            </button>
           </div>
         </article>
       ))}
     </div>
     
     <div class="projects-cta reveal">
-      <a href="https://github.com" target="_blank" rel="noopener" class="github-link">
+      <a href="https://github.com/jwalcutt" target="_blank" rel="noopener" class="github-link">
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
         </svg>
@@ -106,7 +162,83 @@ const projects = [
       </a>
     </div>
   </div>
+
+  {projects.map(project => (
+    <div class="project-modal" id={`modal-${project.id}`} data-modal hidden>
+      <div class="project-modal-backdrop" data-modal-close></div>
+      <div class="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby={`modal-title-${project.id}`}>
+        <button class="project-modal-x" data-modal-close type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <div class="project-modal-content">
+          <span class="project-modal-category">{project.category}</span>
+          <h3 class="project-modal-title" id={`modal-title-${project.id}`}>{project.title}</h3>
+
+          {project.github && (
+            <a class="project-modal-github" href={project.github} target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+          )}
+
+          <p class="project-modal-summary">{project.detail.summary}</p>
+
+          <div class="project-modal-sections">
+            {project.detail.sections.map(section => (
+              <div class="project-modal-section">
+                <h4 class="project-modal-heading">{section.heading}</h4>
+                <p class="project-modal-body">{section.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="project-modal-tags">
+            {project.tags.map(tag => (
+              <span class="project-tag">{tag}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
 </section>
+
+<script>
+  const openers = document.querySelectorAll<HTMLButtonElement>('[data-modal-open]');
+  const modals = document.querySelectorAll<HTMLElement>('[data-modal]');
+
+  function closeAll() {
+    modals.forEach(m => { m.hidden = true; });
+    document.body.style.overflow = '';
+  }
+
+  function openModal(id: string) {
+    const modal = document.getElementById(`modal-${id}`);
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  openers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-modal-open');
+      if (id) openModal(id);
+    });
+  });
+
+  document.querySelectorAll('[data-modal-close]').forEach(el => {
+    el.addEventListener('click', closeAll);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeAll();
+  });
+</script>
 
 <style>
   .projects {
@@ -123,6 +255,7 @@ const projects = [
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    cursor: pointer;
   }
   
   .project-image {
@@ -207,44 +340,20 @@ const projects = [
     border-radius: var(--radius-sm);
   }
   
-  .project-metrics {
-    display: flex;
-    gap: 1.5rem;
-    padding: 1rem 0;
-    margin-bottom: 1rem;
-    border-top: 1px solid var(--border-default);
-    border-bottom: 1px solid var(--border-default);
-  }
-  
-  .project-metric {
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-  }
-  
-  .project-metric-value {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--accent-amber);
-  }
-  
-  .project-metric-label {
-    font-family: var(--font-mono);
-    font-size: 0.625rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  
   .project-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     margin-top: auto;
+    font-family: inherit;
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-secondary);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    align-self: flex-start;
     transition: color 0.3s, gap 0.3s;
   }
   
@@ -302,6 +411,168 @@ const projects = [
     transform: translateX(4px);
   }
   
+  /* Project detail modal */
+  .project-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .project-modal[hidden] {
+    display: none;
+  }
+
+  .project-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(1, 4, 9, 0.75);
+    backdrop-filter: blur(4px);
+    animation: modal-fade 0.25s var(--ease-out-expo);
+  }
+
+  .project-modal-dialog {
+    position: relative;
+    width: min(720px, 100%);
+    max-height: 88vh;
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 80px rgba(1, 4, 9, 0.6);
+    animation: modal-rise 0.35s var(--ease-out-expo);
+  }
+
+  @keyframes modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes modal-rise {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .project-modal-x {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
+  }
+
+  .project-modal-x:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-amber);
+  }
+
+  .project-modal-x svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .project-modal-content {
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .project-modal-category {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-modal-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .project-modal-github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .project-modal-github:hover {
+    border-color: var(--accent-amber);
+    transform: translateY(-2px);
+  }
+
+  .project-modal-github svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .project-modal-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .project-modal-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-modal-heading {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .project-modal-body {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .project-modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-default);
+  }
+
   @media (max-width: 800px) {
     .projects-grid {
       grid-template-columns: 1fr;
