@@ -1,132 +1,62 @@
 ---
+import headshot from '../images/Headshot.jpg';
 ---
 
 <section class="hero">
   <div class="hero-container container">
     <div class="hero-content">
+      <div class="section-eyebrow reveal">
+        <span class="section-eyebrow-line"></span>
+        <span class="section-eyebrow-text">About Me</span>
+      </div>
+
       <h1 class="hero-title reveal reveal-delay-1">
+        <span class="hero-title-line">Software <span class="hero-title-amp">&</span></span>
         <span class="hero-title-line">Machine Learning</span>
-        <span class="hero-title-line">
-          <span class="hero-title-accent">Engineer</span>
-          <span class="hero-title-ampersand">&</span>
-        </span>
-        <span class="hero-title-line">Researcher</span>
+        <span class="hero-title-line"><span class="hero-title-accent">Engineer</span></span>
       </h1>
-      
+
       <p class="hero-description reveal reveal-delay-2">
-        I build intelligent systems that bridge the gap between cutting-edge research 
-        and production-ready applications. Specializing in deep learning, natural language 
-        processing, and computer vision.
+        Hello and welcome to my portfolio! I'm a software and machine learning engineer who enjoys building intelligent
+        systems and the full-stack applications that put them to work. My most recent work
+        spans anomaly detection, retrieval-augmented generation, and turning research
+        ideas into reliable, production-ready tools. I graduated Summa Cum Laude from Cleveland State
+        University in May 2026 with a Bachelor of Science in Computer Science.
       </p>
-      
-      <div class="hero-ctas reveal reveal-delay-3">
-        <a href="#projects" class="hero-btn-primary">
-          <span>View Projects</span>
+
+      <div class="hero-links reveal reveal-delay-3">
+        <a class="hero-link" href="mailto:jacobwalcutt@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
           </svg>
+          <span>Email</span>
         </a>
-        <a href="#contact" class="hero-btn-secondary">
-          <span>Contact Me</span>
+
+        <a class="hero-link" href="https://linkedin.com/in/jacob-walcutt" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </a>
+
+        <a class="hero-link" href="https://github.com/jwalcutt" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          <span>GitHub</span>
         </a>
       </div>
     </div>
+
     <div class="hero-visual reveal reveal-delay-2">
-      <div class="hero-network">
-        <!-- Neural network visualization -->
-        <svg viewBox="0 0 400 400" class="network-svg">
-          <!-- Layer 1 -->
-          <g class="network-layer layer-1">
-            <circle cx="80" cy="80" r="12" class="node"/>
-            <circle cx="80" cy="160" r="12" class="node"/>
-            <circle cx="80" cy="240" r="12" class="node"/>
-            <circle cx="80" cy="320" r="12" class="node"/>
-          </g>
-          
-          <!-- Layer 2 -->
-          <g class="network-layer layer-2">
-            <circle cx="200" cy="100" r="12" class="node"/>
-            <circle cx="200" cy="200" r="12" class="node"/>
-            <circle cx="200" cy="300" r="12" class="node"/>
-          </g>
-          
-          <!-- Layer 3 -->
-          <g class="network-layer layer-3">
-            <circle cx="320" cy="150" r="12" class="node"/>
-            <circle cx="320" cy="250" r="12" class="node"/>
-          </g>
-          
-          <!-- Connections Layer 1 to 2 -->
-          <g class="network-connections">
-            <line x1="92" y1="80" x2="188" y2="100" class="connection"/>
-            <line x1="92" y1="80" x2="188" y2="200" class="connection"/>
-            <line x1="92" y1="80" x2="188" y2="300" class="connection"/>
-            <line x1="92" y1="160" x2="188" y2="100" class="connection"/>
-            <line x1="92" y1="160" x2="188" y2="200" class="connection"/>
-            <line x1="92" y1="160" x2="188" y2="300" class="connection"/>
-            <line x1="92" y1="240" x2="188" y2="100" class="connection"/>
-            <line x1="92" y1="240" x2="188" y2="200" class="connection"/>
-            <line x1="92" y1="240" x2="188" y2="300" class="connection"/>
-            <line x1="92" y1="320" x2="188" y2="100" class="connection"/>
-            <line x1="92" y1="320" x2="188" y2="200" class="connection"/>
-            <line x1="92" y1="320" x2="188" y2="300" class="connection"/>
-          </g>
-          
-          <!-- Connections Layer 2 to 3 -->
-          <g class="network-connections">
-            <line x1="212" y1="100" x2="308" y2="150" class="connection"/>
-            <line x1="212" y1="100" x2="308" y2="250" class="connection"/>
-            <line x1="212" y1="200" x2="308" y2="150" class="connection"/>
-            <line x1="212" y1="200" x2="308" y2="250" class="connection"/>
-            <line x1="212" y1="300" x2="308" y2="150" class="connection"/>
-            <line x1="212" y1="300" x2="308" y2="250" class="connection"/>
-          </g>
-          
-          <!-- Data flow animation -->
-          <g class="data-particles">
-            <circle r="3" class="particle particle-1">
-              <animateMotion dur="2s" repeatCount="indefinite" path="M92,80 L188,200"/>
-            </circle>
-            <circle r="3" class="particle particle-2">
-              <animateMotion dur="2.5s" repeatCount="indefinite" path="M92,160 L188,100"/>
-            </circle>
-            <circle r="3" class="particle particle-3">
-              <animateMotion dur="1.8s" repeatCount="indefinite" path="M212,200 L308,150"/>
-            </circle>
-          </g>
-        </svg>
-        
-        <!-- Decorative elements -->
-        <div class="network-label network-label-input">
-          <span class="network-label-text">Input Layer</span>
-          <span class="network-label-dim">n = 4</span>
-        </div>
-        <div class="network-label network-label-hidden">
-          <span class="network-label-text">Hidden Layer</span>
-          <span class="network-label-dim">n = 3</span>
-        </div>
-        <div class="network-label network-label-output">
-          <span class="network-label-text">Output Layer</span>
-          <span class="network-label-dim">n = 2</span>
-        </div>
-      </div>
-      
-      <!-- Code snippet decoration -->
-      <div class="hero-code">
-        <div class="hero-code-header">
-          <span class="hero-code-dot"></span>
-          <span class="hero-code-dot"></span>
-          <span class="hero-code-dot"></span>
-          <span class="hero-code-filename">model.py</span>
-        </div>
-        <pre><code><span class="code-keyword">class</span> <span class="code-class">Transformer</span>(nn.Module):
-    <span class="code-keyword">def</span> <span class="code-func">__init__</span>(self, d_model=<span class="code-num">512</span>):
-        self.attention = MultiHeadAttention()
-        self.ffn = FeedForward(d_model)</code></pre>
+      <div class="hero-photo">
+        <span class="hero-photo-accent" aria-hidden="true"></span>
+        <img class="hero-photo-img" src={headshot.src} alt="Jacob Walcutt" width="360" height="450" />
       </div>
     </div>
   </div>
-  
+
   <!-- Scroll indicator -->
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
@@ -143,235 +73,115 @@
     padding-top: 100px;
     position: relative;
   }
-  
+
   .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 4rem;
     align-items: center;
   }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
+
+  .section-eyebrow {
+    margin-bottom: 1.5rem;
   }
-  
+
   .hero-title {
     font-size: clamp(2.75rem, 6vw, 4.5rem);
     font-weight: 500;
     line-height: 1.05;
     margin-bottom: 1.5rem;
   }
-  
+
   .hero-title-line {
     display: block;
   }
-  
+
   .hero-title-accent {
     color: var(--accent-amber);
   }
-  
-  .hero-title-ampersand {
+
+  .hero-title-amp {
     font-style: italic;
     color: var(--text-muted);
-    margin: 0 0.25em;
   }
-  
+
   .hero-description {
-    max-width: 520px;
+    max-width: 540px;
     font-size: 1.125rem;
     color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    line-height: 1.8;
+    margin-bottom: 2.25rem;
   }
-  
-  .hero-ctas {
+
+  /* Social links */
+  .hero-links {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin-bottom: 3rem;
   }
-  
-  .hero-btn-primary {
-    display: flex;
+
+  .hero-link {
+    display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
-    font-weight: 600;
-    color: var(--bg-primary);
-    background: var(--accent-amber);
-    border-radius: var(--radius-sm);
-    transition: all 0.3s var(--ease-spring);
-  }
-  
-  .hero-btn-primary:hover {
-    background: var(--accent-amber-light);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(240, 180, 41, 0.2);
-  }
-  
-  .hero-btn-primary svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s;
-  }
-  
-  .hero-btn-primary:hover svg {
-    transform: translateY(4px);
-  }
-  
-  .hero-btn-secondary {
-    padding: 0.875rem 1.5rem;
+    gap: 0.6rem;
+    padding: 0.8rem 1.4rem;
     font-weight: 600;
     color: var(--text-primary);
-    background: transparent;
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-sm);
-    transition: all 0.3s;
-  }
-  
-  .hero-btn-secondary:hover {
-    border-color: var(--accent-amber);
-    color: var(--accent-amber);
-  }
-  
-  /* Visual side */
-  .hero-visual {
-    position: relative;
-  }
-  
-  .hero-network {
-    position: relative;
-    padding: 2rem;
-  }
-  
-  .network-svg {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    display: block;
-  }
-  
-  .node {
-    fill: var(--bg-card);
-    stroke: var(--accent-amber);
-    stroke-width: 2;
-    transition: all 0.3s;
-  }
-  
-  .network-svg:hover .node {
-    fill: var(--accent-amber-dim);
-  }
-  
-  .connection {
-    stroke: var(--border-default);
-    stroke-width: 1;
-    opacity: 0.5;
-  }
-  
-  .particle {
-    fill: var(--accent-amber);
-    opacity: 0.8;
-  }
-  
-  .particle-1 { animation-delay: 0s; }
-  .particle-2 { animation-delay: 0.5s; }
-  .particle-3 { animation-delay: 1s; }
-  
-  .network-label {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 0.125rem;
-    font-family: var(--font-mono);
-  }
-  
-  .network-label-text {
-    font-size: 0.6875rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  .network-label-dim {
-    font-size: 0.625rem;
-    color: var(--text-muted);
-  }
-  
-  .network-label-input {
-    top: 50%;
-    left: -10px;
-    transform: translateY(-50%);
-    text-align: right;
-  }
-  
-  .network-label-hidden {
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-  }
-  
-  .network-label-output {
-    top: 50%;
-    right: -10px;
-    transform: translateY(-50%);
-    text-align: left;
-  }
-  
-  /* Code snippet */
-  .hero-code {
-    position: absolute;
-    bottom: -20px;
-    right: 0;
-    width: 320px;
-    background: var(--bg-secondary);
+    background: var(--bg-card);
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
-    overflow: hidden;
-    font-size: 0.8125rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s var(--ease-spring),
+                border-color 0.3s,
+                box-shadow 0.3s;
   }
-  
-  .hero-code-header {
+
+  .hero-link svg {
+    width: 18px;
+    height: 18px;
+    color: var(--accent-amber);
+  }
+
+  .hero-link:hover {
+    border-color: var(--accent-amber);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+
+  /* Photo */
+  .hero-visual {
+    position: relative;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    background: var(--bg-tertiary);
-    border-bottom: 1px solid var(--border-default);
+    justify-content: center;
   }
-  
-  .hero-code-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--border-default);
+
+  .hero-photo {
+    position: relative;
+    width: min(360px, 100%);
   }
-  
-  .hero-code-dot:nth-child(1) { background: #f78166; }
-  .hero-code-dot:nth-child(2) { background: #f0b429; }
-  .hero-code-dot:nth-child(3) { background: #3fb9a0; }
-  
-  .hero-code-filename {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-muted);
+
+  .hero-photo-img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
   }
-  
-  .hero-code pre {
-    padding: 1rem;
-    margin: 0;
-    font-family: var(--font-mono);
-    line-height: 1.6;
-    overflow-x: auto;
+
+  .hero-photo-accent {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    transform: translate(18px, 18px);
+    border: 1px solid var(--accent-amber);
+    border-radius: var(--radius-lg);
+    opacity: 0.55;
   }
-  
-  .code-keyword { color: var(--accent-coral); }
-  .code-class { color: var(--accent-amber); }
-  .code-func { color: var(--accent-blue); }
-  .code-num { color: var(--accent-teal); }
-  
+
   /* Scroll indicator */
   .hero-scroll {
     position: absolute;
@@ -383,19 +193,19 @@
     align-items: center;
     gap: 0.75rem;
   }
-  
+
   .hero-scroll-line {
     width: 1px;
     height: 40px;
     background: linear-gradient(180deg, var(--accent-amber), transparent);
     animation: scrollLine 2s ease-in-out infinite;
   }
-  
+
   @keyframes scrollLine {
     0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
     50% { opacity: 1; transform: scaleY(1); }
   }
-  
+
   .hero-scroll-text {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
@@ -403,30 +213,30 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
   }
-  
+
   @media (max-width: 1000px) {
     .hero-container {
       grid-template-columns: 1fr;
       gap: 3rem;
     }
-    
+
     .hero-visual {
-      display: none;
+      order: -1;
+      justify-content: flex-start;
+    }
+
+    .hero-photo {
+      width: min(280px, 100%);
     }
   }
-  
+
   @media (max-width: 600px) {
-    .hero-metrics {
-      flex-wrap: wrap;
-      gap: 2rem;
+    .hero-links {
+      gap: 0.6rem;
     }
-    
-    .hero-ctas {
-      flex-direction: column;
-    }
-    
-    .hero-btn-primary, .hero-btn-secondary {
-      justify-content: center;
+
+    .hero-link {
+      padding: 0.7rem 1.1rem;
     }
   }
 </style>
