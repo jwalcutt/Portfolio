@@ -40,7 +40,7 @@ const projects = [
     category: "Deep Learning",
     description: "Unsupervised runtime fault detection in finite state machines (FSMs). A dense autoencoder trained only on normal behavior flags anomalous state sequences, measured against a rule-based transition whitelist across three FSMs and three fault types.",
     tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "NumPy", "scikit-learn"],
-    github: "https://github.com/jwalcutt/fsm-anomaly-detection",
+    github: "https://github.com/jwalcutt/FSM_AE",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
     detail: {
       summary: "A complete pipeline for catching runtime faults in finite state machines. A small dense autoencoder learns only from traces of normal behavior, then flags any state sequence whose reconstruction error passes a learned threshold. Its accuracy is measured directly against a stateless transition-whitelist baseline.",
@@ -72,7 +72,7 @@ const projects = [
     id: "llm-autoformalization",
     title: "Improving LLM Reasoning Through Autoformalization",
     category: "LLMs and Formal Methods",
-    description: "My senior design project. We evaluated and improved how well flagship large language models (LLMs) convert natural-language mathematics into verifiable LEAN 4 code, then wrapped the method in an accessible natural-language interface for formal theorem proving.",
+    description: "My senior design project done with a team of 4 CS students. We evaluated and improved how well flagship large language models (LLMs) convert natural-language mathematics into verifiable LEAN 4 code, then wrapped the method in an accessible natural-language interface for formal theorem proving.",
     tags: ["LLMs", "LEAN 4", "LangChain", "RAG", "Tool Use"],
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80",
     detail: {
@@ -92,7 +92,7 @@ const projects = [
         },
         {
           heading: "Retrieval augmentation",
-          body: "To raise formalization quality, I helped build a vector database over Mathlib for retrieval. The pipeline split the Mathlib4 codebase into roughly 125,000 chunks of 1,024 tokens with 128 tokens of overlap, using OpenAI's tiktoken tokenizer, then embedded each chunk with the text-embedding-ada-002 model into a FAISS index. At query time the system embeds the user's input, pulls the five closest Mathlib chunks, and adds them to the prompt, which helps resolve ambiguous terms and shape correct LEAN structure, types, and headers."
+          body: "To raise formalization quality, we built a vector database over Mathlib for retrieval. The pipeline split the Mathlib4 codebase into roughly 125,000 chunks of 1,024 tokens with 128 tokens of overlap, using OpenAI's tiktoken tokenizer, then embedded each chunk with the text-embedding-ada-002 model into a FAISS index. At query time the system embeds the user's input, pulls the five closest Mathlib chunks, and adds them to the prompt, which helps resolve ambiguous terms and shape correct LEAN structure, types, and headers."
         },
         {
           heading: "Evaluation and results",
