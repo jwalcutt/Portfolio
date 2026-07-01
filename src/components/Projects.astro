@@ -13,7 +13,7 @@ const projects = [
       sections: [
         {
           heading: "The problem",
-          body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not all deserve equal weight. CrossModalRAG answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
+          body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not always deserve equal weight. CrossModalRAG answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
         },
         {
           heading: "Hierarchical memory model",
@@ -40,13 +40,13 @@ const projects = [
     category: "LLMs and Formal Methods",
     description: "My senior design project done with a team of 4 CS students. We evaluated and improved how well flagship large language models (LLMs) convert natural-language mathematics into verifiable LEAN 4 code, then wrapped the method in an accessible natural-language interface for formal theorem proving.",
     tags: ["LLMs", "LEAN 4", "LangChain", "RAG", "Tool Use"],
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80",
+    image: "src/images/leantheorem.png",
     detail: {
       summary: "An online, natural-language interface that shows the autoformalization (AF) abilities of flagship large language models (LLMs), paired with a system that proves symbolic equivalence and measures semantic consistency. To our knowledge, it is the first such system built for the LEAN 4 proof assistant.",
       sections: [
         {
           heading: "Motivation",
-          body: "LLM adoption has grown fast, yet the reasoning often fails under close inspection, behaving more like probabilistic pattern-matching than formal logic. Theorem proving sits upstream of that reasoning and demands real rigor: reading a statement precisely, tracking many claims at once, and deriving new claims from old ones. Formal proof systems help mathematical research but stay niche and hard to use, so the project set out to lower that barrier and to measure how well current models formalize."
+          body: "The adoption of LLMs has grown fast, yet their reasoning often fails under close inspection, behaving more like probabilistic pattern-matching than formal logic. Theorem proving sits upstream of that reasoning and demands real rigor: reading a statement precisely, tracking many claims at once, and deriving new claims from old ones. Formal proof systems help mathematical research but stay niche and hard to use, so we set out to lower that barrier and to measure how well current models formalize."
         },
         {
           heading: "What the project tackled",
@@ -62,7 +62,7 @@ const projects = [
         },
         {
           heading: "Evaluation and results",
-          body: "We tested on ProofNet, a benchmark of college-level mathematics, using two measures: 1) symbolic equivalence (a formal LEAN proof that two formalizations imply each other), and 2) semantic consistency (the cosine similarity between their re-informalized statements). Few-shot examples plus tool access raised compiling propositions from 30.4% to 70.2% on the validation split. Across 186 test problems, Gemini 2.0 Flash led with 30% of theorems compiling and 10% proven fully equivalent, and it outperformed the reasoning model o4-mini, probably because non-reasoning models follow instructions more closely."
+          body: "We tested on ProofNet, a benchmark of college-level mathematics, using two measures: 1) symbolic equivalence (a formal LEAN proof that two formalizations imply each other), and 2) semantic consistency (the cosine similarity between their re-informalized statements). Few-shot examples plus tool access raised compiling propositions from 30.4% to 70.2% on the validation split. Across 186 test problems, Gemini 2.0 Flash led with 30% of theorems compiling and 10% proven fully equivalent, and it outperformed the reasoning model o4-mini, probably because non-reasoning models tend to follow instructions more closely."
         }
       ]
     }
@@ -74,7 +74,7 @@ const projects = [
     description: "Unsupervised runtime fault detection in finite state machines (FSMs). A dense autoencoder trained only on normal behavior flags anomalous state sequences, measured against a rule-based transition whitelist across three FSMs and three fault types.",
     tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "NumPy", "scikit-learn"],
     github: "https://github.com/jwalcutt/FSM_AE",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+    image: "src/images/fsm_ae_architecture.png",
     detail: {
       summary: "A complete pipeline for catching runtime faults in finite state machines. A small dense autoencoder learns only from traces of normal behavior, then flags any state sequence whose reconstruction error passes a learned threshold. Its accuracy is measured directly against a stateless transition-whitelist baseline.",
       sections: [

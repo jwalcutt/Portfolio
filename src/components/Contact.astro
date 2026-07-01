@@ -60,6 +60,9 @@ const contactMethods = [
           <h3 class="contact-form-title">Send a Message</h3>
           
           <form class="contact-form" id="contact-form">
+            <input type="hidden" name="access_key" value="42d98034-b8f9-40db-b30c-ca0b8f47003c" />
+            <input type="checkbox" name="botcheck" class="form-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
@@ -88,12 +91,61 @@ const contactMethods = [
                 <polygon points="22 2 15 22 11 13 2 9 22 2"/>
               </svg>
             </button>
+
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('.form-submit') as HTMLButtonElement | null;
+  const submitLabel = submitBtn?.querySelector('span');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form || !status || !submitBtn || !submitLabel) return;
+
+    const originalLabel = submitLabel.textContent;
+    submitBtn.disabled = true;
+    submitLabel.textContent = 'Sending...';
+    status.textContent = '';
+    status.className = 'form-status';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        status.textContent = "Thank you! Your message has been sent. I'll get back to you soon.";
+        status.classList.add('is-success');
+        form.reset();
+      } else {
+        status.textContent = data.message || 'Something went wrong. Please try again.';
+        status.classList.add('is-error');
+      }
+    } catch {
+      status.textContent = 'Network error. Please try again, or email me directly.';
+      status.classList.add('is-error');
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = originalLabel;
+    }
+  });
+</script>
 
 <style>
   .contact {
@@ -275,8 +327,39 @@ const contactMethods = [
   .form-submit:hover svg {
     transform: translate(4px, -4px);
   }
-  
-  /* Background text */
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Honeypot: hidden from real users, catches bots */
+  .form-botcheck {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    margin-top: 1rem;
+    min-height: 1.25rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .form-status.is-success {
+    color: var(--accent-teal);
+  }
+
+  .form-status.is-error {
+    color: var(--accent-coral);
+  }
+
   @media (max-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr;
