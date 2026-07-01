@@ -10,8 +10,7 @@ const navItems = [
 
 <nav class="nav">
   <div class="nav-container">
-    <a href="#" class="nav-logo">
-      <span class="nav-logo-symbol">λ</span>
+    <a href="#hero" class="nav-logo">
       <span class="nav-logo-name">Jacob Walcutt</span>
     </a>
     
@@ -27,10 +26,10 @@ const navItems = [
       ))}
     </div>
     
-    <a href="#contact" class="nav-cta">
-      <span>Get in Touch</span>
+    <a href="/JacobWalcuttResume2026.pdf" class="nav-cta" download>
+      <span>Download my Resume</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
       </svg>
     </a>
     
@@ -52,7 +51,7 @@ const navItems = [
         {item.label}
       </a>
     ))}
-    <a href="#contact" class="mobile-cta">Get in Touch</a>
+    <a href="/JacobWalcuttResume2026.pdf" class="mobile-cta" download>Download my Resume</a>
   </div>
 </div>
 
@@ -100,28 +99,33 @@ const navItems = [
   .nav-logo {
     display: flex;
     align-items: center;
-    gap: 0.875rem;
   }
-  
-  .nav-logo-symbol {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
+
+  .nav-logo-name {
     font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--bg-primary);
-    background: var(--accent-amber);
-    border-radius: var(--radius-sm);
+    letter-spacing: -0.01em;
+    /* Gold gradient (left half) wiping in over white (right half) */
+    background-image: linear-gradient(
+      90deg,
+      var(--accent-amber) 0%,
+      var(--accent-coral) 45%,
+      var(--accent-coral) 50%,
+      var(--text-primary) 50%,
+      var(--text-primary) 100%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.35s ease;
   }
-  
-  .nav-logo-name {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-primary);
+
+  .nav-logo:hover .nav-logo-name {
+    background-position: 0% 0;
   }
   
   .nav-links {
