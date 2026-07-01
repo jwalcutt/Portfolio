@@ -8,56 +8,56 @@ const skillCategories = [
   {
     name: "Languages",
     skills: [
-      { name: "Python", file: "python.png" },
-      { name: "C", file: "c-programming.png" },
-      { name: "C++", file: "cpp.png" },
-      { name: "C#", file: "csharp.png" },
-      { name: "Rust", file: "rust.png" },
-      { name: "Java", file: "java.png" },
-      { name: "HTML", file: "html.png" },
-      { name: "CSS", file: "css.png" },
-      { name: "JavaScript", file: "javascript.png" },
-      { name: "TypeScript", file: "typescript.png" },
-      { name: "SQL", file: "sql.png" },
+      { name: "Python", file: "python.png", url: "https://www.python.org" },
+      { name: "C", file: "c-programming.png", url: "https://en.cppreference.com/w/c" },
+      { name: "C++", file: "cpp.png", url: "https://isocpp.org" },
+      { name: "C#", file: "csharp.png", url: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
+      { name: "Rust", file: "rust.png", url: "https://www.rust-lang.org" },
+      { name: "Java", file: "java.png", url: "https://www.java.com" },
+      { name: "HTML", file: "html.png", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+      { name: "CSS", file: "css.png", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+      { name: "JavaScript", file: "javascript.png", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+      { name: "TypeScript", file: "typescript.png", url: "https://www.typescriptlang.org" },
+      { name: "SQL", file: "sql.png", url: "https://en.wikipedia.org/wiki/SQL" },
     ],
   },
   {
     name: "Frameworks",
     skills: [
-      { name: "Flask", file: "flask.jpeg" },
-      { name: "Node.js", file: "nodejs.png" },
-      { name: "Next.js", file: "nextjs.png" },
-      { name: "Astro.js", file: "astro.png" },
-      { name: "React.js", file: "react.png" },
-      { name: "React Native", file: "react.png" },
-      { name: "TailwindCSS", file: "tailwind.png" },
+      { name: "Flask", file: "flask.jpeg", url: "https://flask.palletsprojects.com" },
+      { name: "Node.js", file: "nodejs.png", url: "https://nodejs.org" },
+      { name: "Next.js", file: "nextjs.png", url: "https://nextjs.org" },
+      { name: "Astro.js", file: "astro.png", url: "https://astro.build" },
+      { name: "React.js", file: "react.png", url: "https://react.dev" },
+      { name: "React Native", file: "react.png", url: "https://reactnative.dev" },
+      { name: "TailwindCSS", file: "tailwind.png", url: "https://tailwindcss.com" },
     ],
   },
   {
     name: "Libraries",
     skills: [
-      { name: "PyTorch", file: "pytorch.png" },
-      { name: "TensorFlow", file: "tensorflow.png" },
-      { name: "Pandas", file: "pandas.png" },
-      { name: "NumPy", file: "numpy.png" },
-      { name: "Optuna", file: "optuna.png" },
-      { name: "SciPy", file: "scipy.png" },
-      { name: "LangChain", file: "langchain.png" },
-      { name: "Matplotlib", file: "matplotlib.png" },
-      { name: "Plotly", file: "plotly.png" },
+      { name: "PyTorch", file: "pytorch.png", url: "https://pytorch.org" },
+      { name: "TensorFlow", file: "tensorflow.png", url: "https://www.tensorflow.org" },
+      { name: "Pandas", file: "pandas.png", url: "https://pandas.pydata.org" },
+      { name: "NumPy", file: "numpy.png", url: "https://numpy.org" },
+      { name: "Optuna", file: "optuna.png", url: "https://optuna.org" },
+      { name: "SciPy", file: "scipy.png", url: "https://scipy.org" },
+      { name: "LangChain", file: "langchain.png", url: "https://www.langchain.com" },
+      { name: "Matplotlib", file: "matplotlib.png", url: "https://matplotlib.org" },
+      { name: "Plotly", file: "plotly.png", url: "https://plotly.com" },
     ],
   },
   {
     name: "Tools & Platforms",
     skills: [
-      { name: "Git", file: "git.png" },
-      { name: "SQLite", file: "sqlite.png" },
-      { name: "Docker", file: "docker.webp" },
-      { name: "Kubernetes", file: "kubernetes.png" },
-      { name: "AWS", file: "aws.png" },
-      { name: "PostgreSQL", file: "postgres.png" },
-      { name: "Microsoft SQL Server", file: "microsoftsqlserver.png" },
-      { name: "Terraform", file: "terraform.png" },
+      { name: "Git", file: "git.png", url: "https://git-scm.com" },
+      { name: "SQLite", file: "sqlite.png", url: "https://www.sqlite.org" },
+      { name: "Docker", file: "docker.webp", url: "https://www.docker.com" },
+      { name: "Kubernetes", file: "kubernetes.png", url: "https://kubernetes.io" },
+      { name: "AWS", file: "aws.png", url: "https://aws.amazon.com" },
+      { name: "PostgreSQL", file: "postgres.png", url: "https://www.postgresql.org" },
+      { name: "Microsoft SQL Server", file: "microsoftsqlserver.png", url: "https://www.microsoft.com/en-us/sql-server" },
+      { name: "Terraform", file: "terraform.png", url: "https://www.terraform.io" },
     ],
   },
 ];
@@ -85,12 +85,12 @@ const skillCategories = [
           <h3 class="category-title">{category.name}</h3>
           <div class="skill-list">
             {category.skills.map((skill) => (
-              <div class="skill">
+              <a class="skill" href={skill.url} target="_blank" rel="noopener" aria-label={skill.name}>
                 <div class="skill-logo">
                   <img src={logoSrc(skill.file)} alt={skill.name} loading="lazy" />
                 </div>
                 <span class="skill-name">{skill.name}</span>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -181,6 +181,11 @@ const skillCategories = [
     font-size: 0.75rem;
     color: var(--text-secondary);
     line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .skill:hover .skill-name {
+    color: var(--text-primary);
   }
 
   @media (max-width: 800px) {

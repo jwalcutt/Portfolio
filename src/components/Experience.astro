@@ -7,6 +7,7 @@ const experiences = [
     role: "Software Engineering Co-op",
     company: "nVent",
     logo: nventLogo.src,
+    url: "https://www.nvent.com",
     period: "May 2025 - December 2025",
     location: "Solon, OH",
     achievements: [
@@ -22,6 +23,7 @@ const experiences = [
     role: "Software Development Intern",
     company: "VN Services",
     logo: vnLogo.src,
+    url: "https://www.vnservices.com",
     period: "June 2024 - December 2024",
     location: "Chesterland, OH",
     achievements: [
@@ -83,7 +85,9 @@ const experiences = [
             </div>
 
             <div class="timeline-logo">
-              <img src={exp.logo} alt={`${exp.company} logo`} loading="lazy" />
+              <a href={exp.url} class="timeline-logo-link" target="_blank" rel="noopener" aria-label={`Visit ${exp.company}`}>
+                <img src={exp.logo} alt={`${exp.company} logo`} loading="lazy" />
+              </a>
             </div>
           </div>
         ))}
@@ -153,6 +157,15 @@ const experiences = [
     align-self: start;
     display: flex;
     justify-content: center;
+  }
+
+  .timeline-logo-link {
+    display: inline-flex;
+    transition: transform 0.25s var(--ease-spring);
+  }
+
+  .timeline-logo-link:hover {
+    transform: scale(1.07);
   }
 
   .timeline-logo img {
