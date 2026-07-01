@@ -4,7 +4,7 @@ const projects = [
     id: "crossmodal-rag",
     title: "Cross-Modal RAG System",
     category: "Retrieval and Memory",
-    description: "A local-first memory engine that turns long-lived personal artifacts (notes, code, images, and PDF files) into a queryable, time-aware system. Every answer stays tied to retrievable source evidence with an explicit citation.",
+    description: "A local-first memory engine that turns long-lived personal artifacts (notes, code, images, and PDF files) into a queryable, time-aware system. Every answer stays tied to retrievable source evidence, with an explicit citation you can open and verify. Everything runs locally, with no cloud dependency by default.",
     tags: ["RAG", "Embeddings", "FAISS", "Local-First", "OCR"],
     github: "https://github.com/jwalcutt/crossmodalrag",
     image: "src/images/rag.jpeg",
@@ -16,16 +16,16 @@ const projects = [
           body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not all deserve equal weight. CrossModalRAG answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
         },
         {
-          heading: "Cross-modal ingestion",
-          body: "I extended the ingestion pipeline so images and PDF files become first-class evidence alongside notes and code. A PDF chunk carries its page number, so a citation can render as 'file.pdf p.4'. An image is registered as a source and made searchable through local optical character recognition (OCR), recording region coordinates when the engine supplies them. The source fingerprint includes the OCR engine version, so re-ingesting an unchanged file does nothing, while an engine upgrade re-derives only what it affects."
-        },
-        {
           heading: "Hierarchical memory model",
           body: "Above the raw evidence layer, the system derives three higher levels: atomic events, episodes that group those events, and durable concepts. These levels answer synthesis questions such as 'how did my understanding of chunking change?' that flat retrieval cannot. Each higher node links down to at least one citable evidence chunk, so no abstraction loses its provenance. Derivation runs on a local model at temperature zero and skips any input whose fingerprint has not changed."
         },
         {
           heading: "Grounded retrieval and answering",
           body: "A single query returns mixed evidence types (text, code, image, and PDF) and reranks them with awareness of their modality. Generation is constrained to a claim-then-evidence format with explicit source identifiers, and it reports when the evidence is too thin instead of inventing facts. Image-native embeddings stay behind a benefit threshold fixed in advance, so the system adopts them only when measurement justifies the added complexity."
+        },
+        {
+          heading: "Cross-modal ingestion",
+          body: "I extended the ingestion pipeline so images and PDF files become first-class evidence alongside notes and code. A PDF chunk carries its page number, so a citation can render as 'file.pdf p.4'. An image is registered as a source and made searchable through local optical character recognition (OCR), recording region coordinates when the engine supplies them. The source fingerprint includes the OCR engine version, so re-ingesting an unchanged file does nothing, while an engine upgrade re-derives only what it affects."
         },
         {
           heading: "Engineering discipline",
@@ -35,42 +35,8 @@ const projects = [
     }
   },
   {
-    id: "fsm-anomaly",
-    title: "FSM Anomaly Detection",
-    category: "Deep Learning",
-    description: "Unsupervised runtime fault detection in finite state machines (FSMs). A dense autoencoder trained only on normal behavior flags anomalous state sequences, measured against a rule-based transition whitelist across three FSMs and three fault types.",
-    tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "NumPy", "scikit-learn"],
-    github: "https://github.com/jwalcutt/FSM_AE",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
-    detail: {
-      summary: "A complete pipeline for catching runtime faults in finite state machines. A small dense autoencoder learns only from traces of normal behavior, then flags any state sequence whose reconstruction error passes a learned threshold. Its accuracy is measured directly against a stateless transition-whitelist baseline.",
-      sections: [
-        {
-          heading: "The problem",
-          body: "Finite state machines control sequential logic throughout digital hardware, including traffic controllers, communication protocols, and on-chip security blocks. At runtime the state register can be corrupted by stuck-at faults, single-event upsets, fault-injection attacks, or random perturbation, and offline test methods often miss these failures. The project asks whether an autoencoder trained only on normal traces can catch such faults as they happen. It then measures that detector against a rule that checks each consecutive state pair against the legal transition table."
-        },
-        {
-          heading: "What I built",
-          body: "I implemented three reference FSMs of increasing complexity: a four-state traffic light, a five-state detector for the bit pattern 1011, and a six-state vending machine. Around them I built a synthetic data-generation pipeline, three fault injectors (stuck-at, transition, and perturbation), the autoencoder with its training and threshold selection, and a full evaluation harness. The pipeline also produces the figures and tables for a paper: state diagrams, reconstruction-error histograms, receiver operating characteristic (ROC) curves, and the results and sensitivity tables."
-        },
-        {
-          heading: "Method",
-          body: "Each state is one-hot encoded to avoid implying a false ordering, then sliced into sliding windows of length N. A symmetric dense autoencoder (128, 64, 16 bottleneck, 64, 128) trains with binary cross-entropy, the correct loss for one-hot inputs, using Adam over 50 epochs, with one model per FSM. The detection threshold sits at the 99th percentile of the validation reconstruction error, which targets a false-positive rate near 1% suited to a hardware monitor. The whitelist baseline flags any window that contains an illegal consecutive state pair."
-        },
-        {
-          heading: "Results",
-          body: "The autoencoder reaches perfect detection on the periodic traffic light. On the vending machine it closes the recall gap for stuck-at faults, catching 94.1% of them against the whitelist's 74.4%, because a frozen legal state still forms a legal pair that the whitelist accepts. On the bit-pattern detector the whitelist's perfect precision keeps it ahead on F1, yet the autoencoder's area under the curve stays between 0.87 and 0.98, which shows the F1 gap comes mostly from threshold choice. A window-size sweep shows the bit-pattern detector improving steadily as windows grow."
-        },
-        {
-          heading: "Limitations",
-          body: "Each trained model fits only the FSM whose traces it saw, much like a per-asset anomaly detector in industry; the method transfers, but an individual model does not. Every experiment ran on simulated traces, which lack the electrical noise, jitter, and metastability of real registers. Sliding-window detection also adds latency of up to N timesteps, and the percentile threshold trades false-positive rate against sensitivity."
-        }
-      ]
-    }
-  },
-  {
     id: "llm-autoformalization",
-    title: "Improving LLM Reasoning Through Autoformalization",
+    title: "Improving LLM Reasoning via Autoformalization",
     category: "LLMs and Formal Methods",
     description: "My senior design project done with a team of 4 CS students. We evaluated and improved how well flagship large language models (LLMs) convert natural-language mathematics into verifiable LEAN 4 code, then wrapped the method in an accessible natural-language interface for formal theorem proving.",
     tags: ["LLMs", "LEAN 4", "LangChain", "RAG", "Tool Use"],
@@ -100,6 +66,40 @@ const projects = [
         }
       ]
     }
+  },
+  {
+    id: "fsm-anomaly",
+    title: "FSM Anomaly Detection",
+    category: "Deep Learning",
+    description: "Unsupervised runtime fault detection in finite state machines (FSMs). A dense autoencoder trained only on normal behavior flags anomalous state sequences, measured against a rule-based transition whitelist across three FSMs and three fault types.",
+    tags: ["PyTorch", "Autoencoder", "Anomaly Detection", "NumPy", "scikit-learn"],
+    github: "https://github.com/jwalcutt/FSM_AE",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
+    detail: {
+      summary: "A complete pipeline for catching runtime faults in finite state machines. A small dense autoencoder learns only from traces of normal behavior, then flags any state sequence whose reconstruction error passes a learned threshold. Its accuracy is measured directly against a stateless transition-whitelist baseline.",
+      sections: [
+        {
+          heading: "The problem",
+          body: "Finite state machines control sequential logic throughout digital hardware, including traffic controllers, communication protocols, and on-chip security blocks. At runtime the state register can be corrupted by stuck-at faults, single-event upsets, fault-injection attacks, or random perturbation, and offline test methods often miss these failures. The project asks whether an autoencoder trained only on normal traces can catch such faults as they happen. It then measures that detector against a rule that checks each consecutive state pair against the legal transition table."
+        },
+        {
+          heading: "What I built",
+          body: "I implemented three reference FSMs of increasing complexity: a four-state traffic light, a five-state detector for the bit pattern 1011, and a six-state vending machine. Around them I built a synthetic data-generation pipeline, three fault injectors (stuck-at, transition, and perturbation), the autoencoder with its training and threshold selection, and a full evaluation harness. The pipeline also produces several figures and tables including state diagrams, reconstruction-error histograms, receiver operating characteristic (ROC) curves, and the results and sensitivity tables."
+        },
+        {
+          heading: "Method",
+          body: "Each state is one-hot encoded to avoid implying a false ordering, then sliced into sliding windows of length N. A symmetric dense autoencoder trains with binary cross-entropy loss using Adam over 50 epochs, with one model per FSM. The detection threshold sits at the 99th percentile of the validation reconstruction error, which targets a false-positive rate near 1% suited to a hardware monitor. The whitelist baseline flags any window that contains an illegal consecutive state pair."
+        },
+        {
+          heading: "Results",
+          body: "The autoencoder reaches perfect detection on the periodic traffic light. On the vending machine it closes the recall gap for stuck-at faults, catching 94.1% of them against the whitelist's 74.4%, because a frozen legal state still forms a legal pair that the whitelist accepts. On the bit-pattern detector the whitelist's perfect precision keeps it ahead on F1, yet the autoencoder's area under the curve stays between 0.87 and 0.98, which shows the F1 gap comes mostly from threshold choice. A window-size sweep shows the bit-pattern detector improving steadily as windows grow."
+        },
+        {
+          heading: "Limitations",
+          body: "Each trained model fits only the FSM whose traces it saw, much like a per-asset anomaly detector in industry; the method transfers, but an individual model does not. Every experiment ran on simulated traces, which lack the electrical noise, jitter, and metastability of real registers. Sliding-window detection also adds latency of up to N timesteps, and the percentile threshold trades false-positive rate against sensitivity."
+        }
+      ]
+    }
   }
 ];
 ---
@@ -109,14 +109,13 @@ const projects = [
     <div class="section-header reveal">
       <div class="section-eyebrow">
         <span class="section-eyebrow-line"></span>
-        <span class="section-eyebrow-text">Featured Projects</span>
+        <span class="section-eyebrow-text">Projects</span>
       </div>
       <h2 class="section-title">
-        Projects & <span class="text-gradient">Experiments</span>
+        Featured <span class="text-gradient">Projects</span>
       </h2>
       <p class="section-description">
-        A selection of projects and experiments that showcase 
-        my work across deep learning, NLP, and computer vision.
+        A selection of projects that I chose for a reason. Each solves a problem that I believe matters, avoids well-trodden ground, and produces verifiable results during every stage of development. 
       </p>
     </div>
     
