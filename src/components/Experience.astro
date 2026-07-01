@@ -64,7 +64,7 @@ const experiences = [
               <div class="timeline-header">
                 <div class="timeline-role-info">
                   <h3 class="timeline-role">{exp.role}</h3>
-                  <span class="timeline-company">{exp.company}</span>
+                  <a class="timeline-company" href={exp.url} target="_blank" rel="noopener">{exp.company}</a>
                 </div>
                 <div class="timeline-meta">
                   <span class="timeline-period">{exp.period}</span>
@@ -194,8 +194,18 @@ const experiences = [
   }
   
   .timeline-company {
+    display: inline-block;
     font-size: 1rem;
     color: var(--accent-amber);
+    text-decoration: underline;
+    text-decoration-color: rgba(240, 180, 41, 0.4);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.3s, color 0.3s;
+  }
+
+  .timeline-company:hover {
+    color: var(--accent-amber-light);
+    text-decoration-color: var(--accent-amber);
   }
   
   .timeline-meta {
@@ -269,6 +279,10 @@ const experiences = [
     }
   }
 
+  /*
+   * Company-logo cutoff: below this screen width the logo is hidden entirely
+   * (rather than dropping below the text). Change 600px to move the boundary.
+   */
   @media (max-width: 600px) {
     .timeline-item {
       grid-template-columns: 20px 1fr;
@@ -283,15 +297,9 @@ const experiences = [
       align-items: flex-start;
     }
 
-    /* Logo moves under the text, left-aligned */
+    /* Hide the company logo on phone-sized screens */
     .timeline-logo {
-      grid-column: 2;
-      justify-content: flex-start;
-      margin-bottom: 1.5rem;
-    }
-
-    .timeline-logo img {
-      max-height: 4rem;
+      display: none;
     }
   }
 </style>
