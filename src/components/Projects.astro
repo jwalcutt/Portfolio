@@ -1,39 +1,47 @@
 ---
-import ragImage from '../images/rag.jpeg';
 import leanImage from '../images/leantheorem.png';
 import fsmImage from '../images/fsm_ae_architecture.png';
+import engramImage from '../images/engram.png';
 
 const projects = [
   {
-    id: "crossmodal-rag",
-    title: "Cross-Modal RAG System",
+    id: "engram",
+    title: "Engram: A Cross-Modal RAG System",
     category: "Retrieval and Memory",
-    description: "A local-first memory engine that turns long-lived personal artifacts (notes, code, images, and PDF files) into a queryable, time-aware system. Every answer stays tied to retrievable source evidence, with an explicit citation you can open and verify. Everything runs locally, with no cloud dependency by default.",
-    tags: ["RAG", "Embeddings", "FAISS", "Local-First", "OCR"],
-    github: "https://github.com/jwalcutt/crossmodalrag",
-    image: ragImage.src,
+    description: "A local-first memory engine that turns long-lived personal artifacts (notes, code, images, and PDF files) into a queryable, time-aware system. Grounded answers arrive through a CLI, an interactive multi-turn chat, and a local web console, with every claim tied to a citation you can open and verify. Everything runs locally, with no cloud dependency by default.",
+    tags: ["RAG", "Local-First", "Embeddings", "Ollama", "FastAPI", "OCR"],
+    github: "https://github.com/jwalcutt/Engram",
+    image: engramImage.src,
     detail: {
-      summary: "CrossModalRAG builds a hierarchical, time-aware memory on top of standard Retrieval-Augmented Generation (RAG). It answers questions about your own past work and grounds every claim in a specific source location you can open and check.",
+      summary: "Engram builds a hierarchical, time-aware memory on top of standard Retrieval-Augmented Generation (RAG). A local language model answers questions about your own past work, cites the exact evidence behind every claim, and abstains with a stated reason when the evidence is too weak. Answers arrive through a CLI, a multi-turn chat with saved history, and a local web console.",
       sections: [
         {
           heading: "The problem",
-          body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not always deserve equal weight. CrossModalRAG answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
+          body: "Standard RAG indexes text chunks and retrieves them by semantic similarity. That approach breaks down for long-running personal memory for three reasons: 1) context spreads across notes, commits, screenshots, and documents; 2) the same concept changes over time; and 3) old information does not always deserve equal weight. Engram answers this by building a time-aware, hierarchical memory that keeps a strict link from every claim back to its evidence."
         },
         {
           heading: "Hierarchical memory model",
-          body: "Above the raw evidence layer, the system derives three higher levels: atomic events, episodes that group those events, and durable concepts. These levels answer synthesis questions such as 'how did my understanding of chunking change?' that flat retrieval cannot. Each higher node links down to at least one citable evidence chunk, so no abstraction loses its provenance. Derivation runs on a local model at temperature zero and skips any input whose fingerprint has not changed."
+          body: "Above the raw evidence layer, the system derives three higher levels: atomic events, episodes that group those events, and durable concepts. These levels answer synthesis questions such as 'how did my understanding of chunking change?' that flat retrieval cannot. A graph layer adds an importance signal, computing each node's centrality and linking concepts that recur in the same episodes. Each higher node links down to at least one citable evidence chunk, so no abstraction loses its provenance. Derivation runs on a local model at temperature zero and skips any input whose fingerprint has not changed."
         },
         {
           heading: "Grounded retrieval and answering",
-          body: "A single query returns mixed evidence types (text, code, image, and PDF) and reranks them with awareness of their modality. Generation is constrained to a claim-then-evidence format with explicit source identifiers, and it reports when the evidence is too thin instead of inventing facts. Image-native embeddings stay behind a benefit threshold fixed in advance, so the system adopts them only when measurement justifies the added complexity."
+          body: "A hybrid retriever blends semantic, lexical, and recency signals under selectable profiles. It caps how many chunks one source may contribute and de-duplicates near-identical evidence across modalities, so a screenshot of a note and the note itself are not cited twice. The system detects comparative questions ('X versus Y') without a language model and retrieves once per subject, so the better-documented side cannot crowd the other out. A local model then synthesizes an answer that cites its evidence inline, streams token-by-token, flags truncated generations, and abstains with a stated reason when retrieval is too weak. When the evidence covers only part of a question, the answer states what it supports and names the gap."
+        },
+        {
+          heading: "Chat, history, and web console",
+          body: "Answers arrive through three surfaces: a one-shot CLI, an interactive multi-turn chat, and a local web console built with React on a FastAPI backend. Chat follow-ups resolve against the conversation, while every citation stays tied to the current turn's evidence. Conversations save locally, receive an automatic title from the local model, and resume with their context intact. Each reply in the console carries an evidence ledger with claim-to-source drill-down. The API is read-first, binds to localhost by default, and returns the same stable JSON contracts as the CLI."
+        },
+        {
+          heading: "Memory dynamics",
+          body: "Engram treats memory as something that strengthens, fades, and moves. Opt-in, local-only usage tracking records which memories you retrieve and accept, feeding a rehearsal-strength retrieval profile that promotes recently used memories. A forgetting-risk view scores each memory by importance times staleness, answering 'what am I likely forgetting that still matters?'. An active-recall command turns the riskiest memories into grounded study cards. Concept drift measures how far each concept's embedding centroid moves between time windows. A distillation stage derives compact stand-ins, and a pre-committed retrieval-quality gate decides whether they enter the live retrieval path."
         },
         {
           heading: "Cross-modal ingestion",
-          body: "I extended the ingestion pipeline so images and PDF files become first-class evidence alongside notes and code. A PDF chunk carries its page number, so a citation can render as 'file.pdf p.4'. An image is registered as a source and made searchable through local optical character recognition (OCR), recording region coordinates when the engine supplies them. The source fingerprint includes the OCR engine version, so re-ingesting an unchanged file does nothing, while an engine upgrade re-derives only what it affects."
+          body: "Images and PDF files are first-class evidence alongside notes and git history. A PDF chunk carries its page number, so a citation can render as 'file.pdf p.4'. The pipeline registers each image as a source and makes its text searchable through local optical character recognition (OCR), attaching a confidence signal because low-confidence OCR is weak evidence. Source fingerprints fold in the extractor and chunker versions, so re-ingesting an unchanged file does nothing, while an engine upgrade re-derives only what it affects. Image-native embeddings stay behind a benefit threshold fixed in advance, so the system adopts them only when measurement justifies the added complexity."
         },
         {
           heading: "Engineering discipline",
-          body: "The system runs locally and stays light on dependencies. OCR, PDF parsing, and image-embedding backends install as optional extras, and the core package works without them, skipping a modality with a clear message when its extra is absent. Cross-modal evidence reuses the existing database tables through new field values rather than a schema redesign. Retrieval quality is measured by Recall@K, Mean Reciprocal Rank (MRR), and citation hit-rate."
+          body: "The system runs locally and stays light on dependencies. OCR, PDF parsing, embeddings, and the web interface install as optional extras; the core package works without them and skips a capability with a clear message when its extra is absent. Ingestion is fingerprint-based and idempotent, one sync command refreshes every configured connector incrementally, and a doctor command diagnoses the whole setup without writing anything. Every JSON output is a stable, additive-only contract pinned by tests. An evaluation harness measures retrieval quality by Recall@K, Mean Reciprocal Rank (MRR), and citation hit-rate, and answer quality by citation validity, source coverage, and abstention correctness."
         }
       ]
     }
