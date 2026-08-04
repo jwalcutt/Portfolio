@@ -11,13 +11,13 @@ const experiences = [
     period: "May 2025 - December 2025",
     location: "Solon, OH",
     achievements: [
-      "Trained and tested a Convolutional Autoencoder with PyTorch to detect anomalous activity in electrical waveforms, achieving a 93% detection rate on real datasets containing electrical arcs",
-      "Engineered an anomaly scoring and thresholding pipeline using reconstruction error in Python, reducing false positives by 95% across all test cases",
-      "Ran Bayesian hyperparameter optimization with Optuna, significantly cutting experimentation time and achieving a high-performance model with fewer training runs",
-      "Parsed Node.js server logs and designed a dashboard using React.js and TailwindCSS to track test outcomes, improving testing and documentation efficiency",
-      "Maintained a Jira automation tool tracking 1000+ projects, saving the company $100k+ in annual labor costs",
+      "Designed and trained a 1D Convolutional Autoencoder in PyTorch on sliding 512-sample windows of field-collected waveforms, flagging arc faults as reconstruction-error spikes that matched ground-truth current readings",
+      "Engineered a Python scoring pipeline that clustered flagged segments into discrete arc events and quantified their magnitude against the reconstructed wave, nearly eliminating all false positives",
+      "Built an interactive Plotly Dash labeling tool annotating arc events into a JSON ground-truth schema, powering an Optuna Bayesian search of 10+ hyperparameters against an F1-score objective",
+      "Automated a Raspberry Pi weld-testing station with a Node.js (Express) API firing relay hardware over GPIO and logging outcomes server-side, then parsed the logs to visualize pass/fail rates by part type",
+      "Extended an Excel/VBA Jira automation tool tracking 1,000+ projects, estimated to save $100k+ annually",
     ],
-    technologies: ["Python", "PyTorch", "Pandas", "React.js", "TailwindCSS", "JavaScript", "Excel", "Jira", "Optuna"]
+    technologies: ["Python", "PyTorch", "Plotly Dash", "Optuna", "Node.js", "Express", "Raspberry Pi", "Excel/VBA", "Jira"]
   },
   {
     role: "Software Development Intern",
@@ -27,13 +27,13 @@ const experiences = [
     period: "June 2024 - December 2024",
     location: "Chesterland, OH",
     achievements: [
-      "Designed and implemented a full-stack web application using Next.js and Flask capable of securely hosting and querying relational databases stored with SQLite",
-      "Containerized the application with Docker and deployed to AWS Fargate (ECS), configuring task definitions, networking, and environment variables to enable cloud-based data hosting",
-      "Implemented REST API endpoints supporting role-based authentication, CRUD operations, and input validation, improving app security and enforcing consistent API contracts",
-      "Improved the backend features of an internal training platform, implementing server-side changes to support dynamic content delivery and an interactive user experience",
-      "Orchestrated an automation workflow that periodically synchronized database updates with existing visualizations, improving the consistency of observed metrics"
+      "Built a full-stack database-hosting platform with Flask and SQLite spanning 30+ REST endpoints, converting raw CSVs into queryable web databases via pandas ingestion with automatic encoding detection",
+      "Engineered a schema-agnostic query engine with parameterized SQL, delivering filtering, range queries, aggregations, pagination, and CSV/Excel export over tables of 380,000+ rows",
+      "Secured the platform with role-based access control and bcrypt password hashing, adding per-user database permissions and server-side session revocation for instant account bans",
+      "Containerized the application with Docker and deployed it to AWS Fargate (ECS) via Amazon ECR, configuring task definitions and networking to serve the platform from the cloud",
+      "Extended the Flask backend of an internal training platform to serve dynamic course content, and automated a Python data-sync workflow that fed database updates into reporting visualizations"
     ],
-    technologies: ["Python", "Next.js", "Flask", "SQLite", "HTML", "CSS", "JavaScript", "Docker", "AWS Fargate"]
+    technologies: ["Python", "Flask", "SQLite", "SQL", "Pandas", "Docker", "AWS Fargate", "Amazon ECR", "bcrypt"]
   }
 ];
 
