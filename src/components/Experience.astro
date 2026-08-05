@@ -11,16 +11,16 @@ const experiences = [
     period: "May 2025 - December 2025",
     location: "Solon, OH",
     achievements: [
-      "Designed and trained a 1D Convolutional Autoencoder in PyTorch on sliding 512-sample windows of field-collected waveforms, flagging arc faults as reconstruction-error spikes that matched ground-truth current readings",
-      "Engineered a Python scoring pipeline that clustered flagged segments into discrete arc events and quantified their magnitude against the reconstructed wave, nearly eliminating all false positives",
-      "Built an interactive Plotly Dash labeling tool annotating arc events into a JSON ground-truth schema, powering an Optuna Bayesian search of 10+ hyperparameters against an F1-score objective",
+      "Trained and tested a 1D Convolutional Autoencoder in PyTorch on sliding 512-sample windows of field-collected waveforms, flagging arc faults as reconstruction-error spikes that matched ground-truth current readings",
+      "Engineered a Python scoring pipeline that clustered flagged segments into discrete arc events and quantified their magnitude against the reconstructed wave, eliminating nearly all false positives",
+      "Built an interactive Plotly/Dash labeling tool annotating arc events into a JSON ground-truth schema, powering an Optuna Bayesian search of 10+ hyperparameters against an F1-score objective",
       "Automated a Raspberry Pi weld-testing station with a Node.js (Express) API firing relay hardware over GPIO and logging outcomes server-side, then parsed the logs to visualize pass/fail rates by part type",
       "Extended an Excel/VBA Jira automation tool tracking 1,000+ projects, estimated to save $100k+ annually",
     ],
-    technologies: ["Python", "PyTorch", "Plotly Dash", "Optuna", "Node.js", "Express", "Raspberry Pi", "Excel/VBA", "Jira"]
+    technologies: ["Python", "PyTorch", "Plotly/Dash", "Optuna", "Node.js", "Express", "Excel/VBA", "Jira"]
   },
   {
-    role: "Software Development Intern",
+    role: "Data Analyst Intern",
     company: "VN Services",
     logo: vnLogo.src,
     url: "https://www.vnservices.com",
@@ -29,7 +29,7 @@ const experiences = [
     achievements: [
       "Built a full-stack database-hosting platform with Flask and SQLite spanning 30+ REST endpoints, converting raw CSVs into queryable web databases via pandas ingestion with automatic encoding detection",
       "Engineered a schema-agnostic query engine with parameterized SQL, delivering filtering, range queries, aggregations, pagination, and CSV/Excel export over tables of 380,000+ rows",
-      "Secured the platform with role-based access control and bcrypt password hashing, adding per-user database permissions and server-side session revocation for instant account bans",
+      "Secured the platform with role-based access control and bcrypt password hashing, adding per-user database permissions and server-side session revocation",
       "Containerized the application with Docker and deployed it to AWS Fargate (ECS) via Amazon ECR, configuring task definitions and networking to serve the platform from the cloud",
       "Extended the Flask backend of an internal training platform to serve dynamic course content, and automated a Python data-sync workflow that fed database updates into reporting visualizations"
     ],
